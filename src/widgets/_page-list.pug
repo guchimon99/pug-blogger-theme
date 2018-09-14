@@ -7,10 +7,9 @@ mixin Widget_PageList (id, title)
 
     b:widget-settings
       b:widget-setting(name='pageListJson')
-        | ![CDATA[{
-        | 'home': {'href': 'https://wfhpdj9n.blogspot.com/', 'title': 'ホーム', 'position': 0},
-        | '9121814099402565628': {'href': 'https://wfhpdj9n.blogspot.com/p/pagesample.html', 'title': 'page_sample', 'position': 1}
-        | }]]
+        | ![CDATA[
+        include  ../config/page-list.json
+        | ]]
       b:widget-setting(name='homeTitle') ホーム
 
     b:includable#main
@@ -27,7 +26,7 @@ mixin Widget_PageList (id, title)
             | &amp;#9660;
           b:else/
           ul
-            b:loop values='data:links' var='link'
+            b:loop(values='data:links' var='link')
               li
                 b:class(cond='data:link.isCurrentPage' name='selected')/
                 a(expr:href!='data:link.href')
