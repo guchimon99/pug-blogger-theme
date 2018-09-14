@@ -1,0 +1,22 @@
+{
+  "name": "blogger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/pug ./src/entry --out ./build --pretty --doctype xml",
+    "watch": "./node_modules/.bin/pug ./src/entry --out ./build --pretty --doctype xml--watch ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://guchimon99@bitbucket.org/team_moukon_joshi/blogger.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/team_moukon_joshi/blogger#readme",
+  "devDependencies": {
+    "pug": "^2.0.3",
+    "pug-cli": "^1.0.0-alpha6"
+  }
+}

@@ -1,0 +1,68 @@
+mixin Widget_Header (id, title, locked)
+  b:widget(
+    id=id,
+    title=title,
+    locked=locked,
+    type="Header"
+  )
+    b:widget-settings
+      b:widget-setting(name='displayUrl')/
+      b:widget-setting(name='displayHeight') 0
+      b:widget-setting(name='sectionWidth') -1
+      b:widget-setting(name='useImage') false
+      b:widget-setting(name='shrinkToFit') false
+      b:widget-setting(name='imagePlacement') BEHIND
+      b:widget-setting(name='displayWidth') 0
+
+    b:includable#main
+      b:if(cond!='data:useImage')
+        b:if(cond!='data:imagePlacement == &quot;BEHIND&quot;')
+
+          b:if(cond!='data:mobile')
+
+            #header-inner
+              .titlewrapper(style='background: transparent')
+                h1.title(style='background:transparent; border-width: 0px;')
+                  b:include(name='title')/
+                b:include(name='description')/
+
+            b:else/
+
+            div#header-inner(expr:style!='&quot;background-image: url(\&quot;&quot; + data:sourceUrl + &quot;\&quot;); &quot; + &quot;background-position: &quot; + data:backgroundPositionStyleStr + &quot;; &quot; + data:widthStyleStr + &quot;min-height: &quot; + data:height + &quot;_height: &quot; + data:height + &quot;background-repeat: no-repeat; &quot;')
+              div.titlewrapper(style='background: transparent')
+                h1.title(style='background:transparent; border-width: 0px;')
+                  b:include(name='title')/
+                b:include(name='description')/
+
+          b:else/
+
+          div#header-inner
+            a(expr:href!='data:blog.homepageUrl', style='display: block')
+              img(
+                expr:id!='data:widget.instanceId + &quot;_headerimg&quot;'
+                expr:src!='data:sourceUrl',
+                expr:alt!='data:title',
+                expr:height!='data:height',
+                expr:width!='data:width',
+                style='display: block'
+              )
+            b:if(cond!='data:imagePlacement == &quot;BEFORE_DESCRIPTION&quot;')
+              b:include(name='description')/
+
+        b:else/
+
+        #header-inner
+          .titlewrapper
+            h1.title
+              b:include(name='title')
+          b:include(name='description')/
+
+    b:includable#description
+      .descriptionwrapper
+        p.description
+          span
+            data:description/
+
+    b:includable#title
+      b:tag(name='a', cond!='data:blog.url != data:blog.homepageUrl', expr:href!='data:blog.homepageUrl')
+        data:title/

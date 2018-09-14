@@ -1,0 +1,11 @@
+mixin Widget_HTML(id, title)
+  b:widget(
+    id=id,
+    title=title,
+    locked="true",
+    type='HTML'
+  )
+    b:widget-settings
+      b:widget-setting(name='content')
+    b:includable#main
+      data:content

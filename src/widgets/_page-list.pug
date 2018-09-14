@@ -1,0 +1,38 @@
+mixin Widget_PageList (id, title)
+  b:widget(
+    id=id
+    title=title
+    locked='true'
+    type='PageList')
+
+    b:widget-settings
+      b:widget-setting(name='pageListJson')
+        | ![CDATA[{
+        | 'home': {'href': 'https://wfhpdj9n.blogspot.com/', 'title': 'ホーム', 'position': 0},
+        | '9121814099402565628': {'href': 'https://wfhpdj9n.blogspot.com/p/pagesample.html', 'title': 'page_sample', 'position': 1}
+        | }]]
+      b:widget-setting(name='homeTitle') ホーム
+
+    b:includable#main
+      b:if(cond!='data:title != &quot;&quot;')
+        h2  #[#{'data:title'}/]
+      div.widget-content
+        b:if(cond!='data:mobile')
+          select(expr:id='data:widget.instanceId + &quot;_select&quot;')
+            b:loop(values='data:links' var='link')
+              option(expr:value!='data:link.href')
+                b:attr(cond='data:link.isCurrentPage' name='selected' value='selected')/
+                #{'data:link.title'}/
+          span.pagelist-arrow
+            | &amp;#9660;
+          b:else/
+          ul
+            b:loop values='data:links' var='link'
+          <li>
+            <b:class cond='data:link.isCurrentPage' name='selected'/>
+            <a expr:href='data:link.href'><data:link.title/></a>
+          </li>
+        </b:loop>
+      </ul>
+    </b:if>
+    b:include(name='quickedit')/

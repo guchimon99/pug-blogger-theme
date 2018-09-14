@@ -1,0 +1,35 @@
+include ../widgets/index
+
+doctype xml
+doctype html
+
+html
+  head
+    b:include(data='blog', name='all-head-content')/
+    meta(name='viewport', content='width=device-width')/
+    title
+      b:if(cond!='data:blog.pageType == &quot;index&quot;')
+        | #[#{'data:blog.pageName'}/] | #[#{'data:blog.title'}/]
+        b:else/
+        | ページがみつかりませんでした | #[#{'data:blog.title'}/]
+    link(rel='stylesheet', crossorigin='anonymous', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO')/
+    b:skin
+      | <![CDATA[
+      include ../assets/css/skin.css
+      | ]]>
+
+  body
+    .container
+      .row.flex-row-reverse
+        .col-12.col-sm-10
+          #top
+            img(src="", alt="")
+          include ../sections/_side
+        .col-12.col-sm-2
+          include ../partials/_header
+          include ../partials/_main
+          include ../partials/_footer
+
+    script(crossorigin='anonymous', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+    script(crossorigin='anonymous', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
+    script(crossorigin='anonymous', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js')

@@ -1,0 +1,21 @@
+mixin Widget_BlogSearch(id, title)
+  b:widget(
+    id=id,
+    title=title,
+    locked='true',
+    type='BlogSearch'
+  )
+    b:includable#main
+      div(expr:id!='data:widget.instanceId + &quot;_form&quot;')
+        form.form-inline(expr:action!='data:blog.searchUrl')
+          b:attr(cond!='not data:view.isPreview',name='target', value='_top')/
+          input.form-control(
+            name='q', type='text'
+            autocomplete='off',
+            expr:value!='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;'
+          )
+          button.btn.btn-primary(
+            type='submit',
+            expr:value!='data:messages.search'
+          ) 検索
+    //- b:include(name='quickedit')
