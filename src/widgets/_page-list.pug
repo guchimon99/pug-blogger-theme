@@ -28,11 +28,8 @@ mixin Widget_PageList (id, title)
           b:else/
           ul
             b:loop values='data:links' var='link'
-          <li>
-            <b:class cond='data:link.isCurrentPage' name='selected'/>
-            <a expr:href='data:link.href'><data:link.title/></a>
-          </li>
-        </b:loop>
-      </ul>
-    </b:if>
-    b:include(name='quickedit')/
+              li
+                b:class(cond='data:link.isCurrentPage' name='selected')/
+                a(expr:href!='data:link.href')
+                  #{'data:link.title'}/
+      //- b:include(name='quickedit')/
