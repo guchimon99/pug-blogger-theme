@@ -12,11 +12,6 @@ mixin Widget_Label(id, title)
       b:widget-setting(name='showFreqNumbers') false
 
     b:includable#main
-
-      b:if(cond!='data:title != &quot;&quot;')
-        h2
-          #{'data:title'}/
-
       div(expr:class!='&quot;widget-content &quot; + data:display + &quot;-label-widget-content&quot;')
         b:if(cond!='data:display == &quot;list&quot;')
           ul
