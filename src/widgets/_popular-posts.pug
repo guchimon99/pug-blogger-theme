@@ -12,7 +12,7 @@ mixin Widget_PopularPosts (id, title)
       b:widget-setting(name='timeRange') LAST_YEAR
 
     b:includable#main
-      b:if(cond='data:title != &quot;&quot;')
+      b:if(cond!='data:title != &quot;&quot;')
         h2
           #{'data:title'}/
       div.widget-content.popular-posts

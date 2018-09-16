@@ -13,33 +13,33 @@ mixin Widget_Label(id, title)
 
     b:includable#main
 
-    b:if(cond!='data:title != &quot;&quot;')
-      h2
-        #{'data:title'}/
+      b:if(cond!='data:title != &quot;&quot;')
+        h2
+          #{'data:title'}/
 
-    div(expr:class!='&quot;widget-content &quot; + data:display + &quot;-label-widget-content&quot;')
-      b:if(cond='data:display == &quot;list&quot;')
-        ul
+      div(expr:class!='&quot;widget-content &quot; + data:display + &quot;-label-widget-content&quot;')
+        b:if(cond!='data:display == &quot;list&quot;')
+          ul
+            b:loop(values='data:labels' var='label')
+              li
+                b:if(cond!='data:blog.url == data:label.url')
+                  span(expr:dir='data:blog.languageDirection') #[#{'data:label.name'}/]
+                  b:else/
+                  a(expr:dir!='data:blog.languageDirection' expr:href!='data:label.url') #[#{'data:label.name'}/]
+
+                b:if(cond!='data:showFreqNumbers')
+                  span(dir='ltr') (#[#{'data:label.count'}/])
+
+          b:else/
+
           b:loop(values='data:labels' var='label')
-            li
-              b:if(cond='data:blog.url == data:label.url')
-                span(expr:dir='data:blog.languageDirection') #[#{'data:label.name'}/]
+            span(expr:class!='&quot;label-size label-size-&quot; + data:label.cssSize')
+              b:if(cond!='data:blog.url == data:label.url')
+                span(expr:dir!='data:blog.languageDirection') #[#{'data:label.name'}/]
                 b:else/
                 a(expr:dir!='data:blog.languageDirection' expr:href!='data:label.url') #[#{'data:label.name'}/]
 
               b:if(cond!='data:showFreqNumbers')
-                span(dir='ltr') (#[#{'data:label.count'}/])
+                span(class='label-count' dir='ltr') (#[#{'data:label.count'}/])
 
-        b:else/
-
-        b:loop(values='data:labels' var='label')
-          span(expr:class!='&quot;label-size label-size-&quot; + data:label.cssSize')
-            b:if(cond!='data:blog.url == data:label.url')
-              span(expr:dir!='data:blog.languageDirection') #[#{'data:label.name'}/]
-              b:else/
-              a(expr:dir!='data:blog.languageDirection' expr:href!='data:label.url') #[#{'data:label.name'}/]
-
-            b:if(cond!='data:showFreqNumbers')
-              span(class='label-count' dir='ltr') (#[#{'data:label.count'}/])
-
-      //- b:include(name='quickedit')/
+        //- b:include(name='quickedit')/

@@ -206,7 +206,7 @@ mixin Widget_Blog(id, title)
 
                   a(expr:name!='data:comment.anchorName')/
 
-                  b:if(cond='data:blog.enabledCommentProfileImages')
+                  b:if(cond!='data:blog.enabledCommentProfileImages')
                     #{'data:comment.authorAvatarImage'}/
 
                   b:if(cond!='data:comment.authorUrl')
@@ -247,7 +247,7 @@ mixin Widget_Blog(id, title)
 
           p.comment-footer
             b:if(cond!='data:post.embedCommentForm')
-              b:if(cond='data:post.allowNewComments')
+              b:if(cond!='data:post.allowNewComments')
                 b:include(data='post', name='comment-form')/
 
                 b:else/
@@ -257,7 +257,7 @@ mixin Widget_Blog(id, title)
               a(expr:href!='data:post.addCommentUrl', expr:onclick!='data:post.addCommentOnclick')
                 data:postCommentMsg
 
-        b:if(cond='data:showCmtPopup')
+        b:if(cond!='data:showCmtPopup')
           #comment-popup
             iframe(allowtransparency='true',frameborder='0',id='comment-actions',name='comment-actions',scrolling='no')/
 
@@ -267,7 +267,7 @@ mixin Widget_Blog(id, title)
 
     b:includable#feedLinks
       b:if(cond!='data:blog.pageType != &quot;item&quot;')
-        b:if(cond='data:feedLinks')
+        b:if(cond!='data:feedLinks')
           .blog-feeds
             b:include(data='feedLinks' name='feedLinksBody')/
 
@@ -447,7 +447,7 @@ mixin Widget_Blog(id, title)
     b:includable#nextprev
       div#blog-pager.blog-pager
 
-        b:if(cond='data:newerPageUrl')
+        b:if(cond!='data:newerPageUrl')
           span#blog-pager-newer-link
             a.blog-pager-newer-link(
               expr:href!='data:newerPageUrl',
@@ -455,7 +455,7 @@ mixin Widget_Blog(id, title)
               expr:title='data:newerPageTitle')
               data:newerPageTitle/
 
-        b:if(cond='data:olderPageUrl')
+        b:if(cond!='data:olderPageUrl')
           span#blog-pager-older-link
             a.blog-pager-older-link(
               expr:href!='data:olderPageUrl',
@@ -533,7 +533,7 @@ mixin Widget_Blog(id, title)
                       #{'data:post.timestamp'}/
 
             span.reaction-buttons
-              b:if(cond='data:top.showReactions')
+              b:if(cond!='data:top.showReactions')
                 table(border='0' cellpadding='0' cellspacing='0' width='100%')
                   tr
                     td.reactions-label-cell(nowrap='nowrap' valign='top' width='1%')
@@ -554,7 +554,7 @@ mixin Widget_Blog(id, title)
                 data='post' name='comment_count_picker')/
 
             span.post-backlinks.post-comment-link
-              b:if(cond='data:blog.pageType not in {&quot;item&quot;,&quot;static_page&quot;} and data:post.showBacklinks')
+              b:if(cond!='data:blog.pageType not in {&quot;item&quot;,&quot;static_page&quot;} and data:post.showBacklinks')
                 a.comment-link(expr:href='data:post.url + &quot;#links&quot;')
                   #{'data:top.backlinkLabel'}/
 
@@ -570,12 +570,12 @@ mixin Widget_Blog(id, title)
 
           div.post-footer-line.post-footer-line-2
             span.post-labels
-              b:if(cond='data:top.showPostLabels and data:post.labels')
+              b:if(cond!='data:top.showPostLabels and data:post.labels')
                 #{'data:postLabelsLabel'}/
                 b:loop(values='data:post.labels' var='label')
                   a(expr:href='data:label.url' rel='tag')
                     #{'data:label.name'}/
-                  b:if(cond='not data:label.isLast') ,
+                  b:if(cond!='not data:label.isLast') ,
 
           div.post-footer-line.post-footer-line-3
             span.post-location
@@ -586,7 +586,7 @@ mixin Widget_Blog(id, title)
 
           b:if(cond!='data:post.authorAboutMe')
             div.author-profile(itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person')
-              b:if(cond='data:post.authorPhoto.url')
+              b:if(cond!='data:post.authorPhoto.url')
                 img(expr:src='data:post.authorPhoto.url' itemprop='image' width='50px')/
 
               div
@@ -603,14 +603,14 @@ mixin Widget_Blog(id, title)
             img(alt='' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18')/
 
     b:includable#shareButtons(var='post')
-      b:if(cond='data:top.showEmailButton')
+      b:if(cond!='data:top.showEmailButton')
         a.goog-inline-block.share-button.sb-email(
           expr:href!='data:post.sharePostUrl + &quot;&amp;target=email&quot;'
           expr:title!='data:top.emailThisMsg'
           target='_blank')
           span.share-button-link-text
             #{'data:top.emailThisMsg'}/
-      b:if(cond='data:top.showBlogThisButton')
+      b:if(cond!='data:top.showBlogThisButton')
         a.goog-inline-block.share-button.sb-blog(
           expr:href!='data:post.sharePostUrl + &quot;&amp;target=blog&quot;'
           expr:onclick='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=270,width=475\&quot;); return false;&quot;'
@@ -618,14 +618,14 @@ mixin Widget_Blog(id, title)
           target='_blank')
           span.share-button-link-text
             #{'data:top.blogThisMsg'}/
-      b:if(cond='data:top.showTwitterButton')
+      b:if(cond!='data:top.showTwitterButton')
         a.goog-inline-block.share-button.sb-twitter(
           expr:href!='data:post.sharePostUrl + &quot;&amp;target=twitter&quot;'
           expr:title='data:top.shareToTwitterMsg'
           target='_blank')
           span.share-button-link-text
             #{'data:top.shareToTwitterMsg'}/
-      b:if(cond='data:top.showFacebookButton')
+      b:if(cond!='data:top.showFacebookButton')
         a.goog-inline-block.share-button.sb-facebook(
           expr:href!='data:post.sharePostUrl + &quot;&amp;target=facebook&quot;'
           expr:onclick!='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;'
@@ -633,7 +633,7 @@ mixin Widget_Blog(id, title)
           target='_blank')
           span.share-button-link-text
             #{'data:top.shareToFacebookMsg'}/
-      b:if(cond='data:top.showPinterestButton')
+      b:if(cond!='data:top.showPinterestButton')
         a.goog-inline-block.share-button.sb-pinterest(
           expr:href='data:post.sharePostUrl + &quot;&amp;target=pinterest&quot;'
           expr:title='data:top.shareToPinterestMsg'
@@ -641,7 +641,7 @@ mixin Widget_Blog(id, title)
           span.share-button-link-text
             #{'data:top.shareToPinterestMsg'}/
 
-      b:if(cond='data:top.showPlusOne')
+      b:if(cond!='data:top.showPlusOne')
         div.goog-inline-block.google-plus-share-container
           #{'data:post.googlePlusShareTag'}/
 
@@ -705,7 +705,7 @@ mixin Widget_Blog(id, title)
             b:else/
             #{'data:post.noNewCommentsText'}/
 
-        b:if(cond='data:showCmtPopup')
+        b:if(cond!='data:showCmtPopup')
           div#comment-popup
             iframe(allowtransparency='true' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no')/
 
