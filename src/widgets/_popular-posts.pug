@@ -28,6 +28,7 @@ mixin Widget_PopularPosts (id, title)
 
                 b:else/
                 div(expr:class!='data:showSnippets ? &quot;item-content&quot; : &quot;item-thumbnail-only&quot;')
+
                   b:if(cond!='data:post.featuredImage.isResizable or data:post.thumbnail')
                     div.item-thumbnail
                       a(expr:href='data:post.href' target='_blank')
@@ -36,11 +37,11 @@ mixin Widget_PopularPosts (id, title)
                           var='image')
                           img(alt='' border='0' expr:src!='data:image')/
 
-                    div.item-title
-                      a(expr:href='data:post.href')
-                        #{'data:post.title'}/
-                    b:if(cond!='data:showSnippets')
-                      div.item-snippet
-                        #{'data:post.snippet'}/
-                    div(style='clear: both;')/
+                  div.item-title
+                    a(expr:href='data:post.href')
+                      #{'data:post.title'}/
+                  b:if(cond!='data:showSnippets')
+                    div.item-snippet
+                      #{'data:post.snippet'}/
+                  div(style='clear: both;')/
         //- b:include(name='quickedit')/
