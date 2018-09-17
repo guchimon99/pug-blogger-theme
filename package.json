@@ -16,6 +16,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/team_moukon_joshi/blogger#readme",
   "devDependencies": {
+    "jstransformer-escape-html": "^1.1.0",
     "pug": "^2.0.3",
     "pug-cli": "^1.0.0-alpha6"
   }
