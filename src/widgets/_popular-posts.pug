@@ -1,4 +1,5 @@
-mixin Widget_PopularPosts (id, title)
+mixin Widget_PopularPosts(id, title, cond)
+  - var cond = cond || 'true'
   b:widget(
     id=id
     locked='false'
@@ -13,35 +14,36 @@ mixin Widget_PopularPosts (id, title)
       b:widget-setting(name='timeRange') LAST_YEAR
 
     b:includable#main
-      div.widget-content.popular-posts
-        ul
-          b:loop(values='data:posts' var='post')
-            li
-              b:if(cond!='!data:showThumbnails')
-                b:if(cond!='!data:showSnippets')
-                  a(expr:href='data:post.href')
-                    #{'data:post.title'}/
-                  b:else/
-                  div.item-title
-                    a(expr:href!='data:post.href') #[#{'data:post.title'}/]
-                  div.item-snippet
-                    #{'data:post.snippet'}/
-
-                b:else/
-                div(expr:class!='data:showSnippets ? &quot;item-content&quot; : &quot;item-thumbnail-only&quot;')
-
-                  b:if(cond!='data:post.featuredImage.isResizable or data:post.thumbnail')
-                    div.item-thumbnail
-                      a(expr:href='data:post.href' target='_blank')
-                        b:with(
-                          value!='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;) : data:post.thumbnail'
-                          var='image')
-                          img(alt='' border='0' expr:src!='data:image')/
-
-                  div.item-title
+      b:if(cond!=cond)
+        div.widget-content.popular-posts
+          ul
+            b:loop(values='data:posts' var='post')
+              li
+                b:if(cond!='!data:showThumbnails')
+                  b:if(cond!='!data:showSnippets')
                     a(expr:href='data:post.href')
                       #{'data:post.title'}/
-                  b:if(cond!='data:showSnippets')
+                    b:else/
+                    div.item-title
+                      a(expr:href!='data:post.href') #[#{'data:post.title'}/]
                     div.item-snippet
                       #{'data:post.snippet'}/
-                  div(style='clear: both;')/
+
+                  b:else/
+                  div(expr:class!='data:showSnippets ? &quot;item-content&quot; : &quot;item-thumbnail-only&quot;')
+
+                    b:if(cond!='data:post.featuredImage.isResizable or data:post.thumbnail')
+                      div.item-thumbnail
+                        a(expr:href='data:post.href' target='_blank')
+                          b:with(
+                            value!='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;) : data:post.thumbnail'
+                            var='image')
+                            img(alt='' border='0' expr:src!='data:image')/
+
+                    div.item-title
+                      a(expr:href='data:post.href')
+                        #{'data:post.title'}/
+                    b:if(cond!='data:showSnippets')
+                      div.item-snippet
+                        #{'data:post.snippet'}/
+                    div(style='clear: both;')/

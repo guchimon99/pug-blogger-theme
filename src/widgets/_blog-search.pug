@@ -1,4 +1,5 @@
-mixin Widget_BlogSearch(id, title)
+mixin Widget_BlogSearch(id, title, cond)
+  - var cond = cond || 'true'
   b:widget(
     id=id
     locked='false'
@@ -7,18 +8,19 @@ mixin Widget_BlogSearch(id, title)
     version='1')
 
     b:includable#main
-      div(expr:id!='data:widget.instanceId + &quot;_form&quot;')
-        form(expr:action!='data:blog.searchUrl')
-          b:attr(cond!='not data:view.isPreview' name='target' value='_top')/
-          label ブログ内を検索
-          div.input-group.mb-3
-            input.form-control(
-              name='q' type='text'
-              autocomplete='off'
-              expr:value!='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;'
-            )
-            div.input-group-append
-              button.btn.btn-primary(
-                type='submit',
-                expr:value!='data:messages.search'
-              ) 検索
+      b:if(cond!=cond)
+        div(expr:id!='data:widget.instanceId + &quot;_form&quot;')
+          form(expr:action!='data:blog.searchUrl')
+            b:attr(cond!='not data:view.isPreview' name='target' value='_top')/
+            label ブログ内を検索
+            div.input-group.mb-3
+              input.form-control(
+                name='q' type='text'
+                autocomplete='off'
+                expr:value!='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;'
+              )
+              div.input-group-append
+                button.btn.btn-primary(
+                  type='submit',
+                  expr:value!='data:messages.search'
+                ) 検索

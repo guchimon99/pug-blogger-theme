@@ -1,4 +1,5 @@
-mixin Widget_HTML(id, title)
+mixin Widget_HTML(id, title, cond)
+  - var cond = cond || 'true'
   b:widget(
     id=id
     locked="false"
@@ -11,4 +12,5 @@ mixin Widget_HTML(id, title)
         block
 
     b:includable#main
-      data:content/
+      b:if(cond!=cond)
+        data:content/

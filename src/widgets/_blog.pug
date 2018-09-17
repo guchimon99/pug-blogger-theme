@@ -1,4 +1,5 @@
-mixin Widget_Blog(id, title)
+mixin Widget_Blog(id, title, cond)
+  - var cond = cond || 'true'
   b:widget(
     id=id
     locked='false'
@@ -29,41 +30,42 @@ mixin Widget_Blog(id, title)
       b:widget-setting(name='showReactions') false
 
     b:includable#main(var='top')
-      b:if(cond!='!data:mobile')
+      b:if(cond!=cond)
+        b:if(cond!='!data:mobile')
 
-        .blog-posts.hfeed
-          b:include(data='top' name='status-message')/
-          b:loop(values='data:posts' var='post')
-            b:if(cond!='data:post.isDateStart and not data:post.isFirstPost')
+          .blog-posts.hfeed
+            b:include(data='top' name='status-message')/
+            b:loop(values='data:posts' var='post')
+              b:if(cond!='data:post.isDateStart and not data:post.isFirstPost')
+                | &lt;/div&gt;&lt;/div&gt;
+              b:if(cond!='data:post.isDateStart')
+                | &lt;div class=&quot;date-outer&quot;&gt;
+              b:if(cond!='data:post.dateHeader')
+                h2.data-header
+                  span #[#{'data:post.dateHeader'}/]
+              b:if(cond!='data:post.isDateStart')
+                | &lt;div class=&quot;date-posts&quot;&gt;
+              .post-outer
+                b:include(data='post' name='post')/
+                b:include(
+                  cond!='data:blog.pageType in {&quot;static_page&quot;,&quot;item&quot;}'
+                  data='post' name='comment_picker'
+                )
+              b:if(cond!='data:post.includeAd')
+                .inline-ad
+                  data:adCode
+
+            b:if(cond!='data:numPosts != 0')
               | &lt;/div&gt;&lt;/div&gt;
-            b:if(cond!='data:post.isDateStart')
-              | &lt;div class=&quot;date-outer&quot;&gt;
-            b:if(cond!='data:post.dateHeader')
-              h2.data-header
-                span #[#{'data:post.dateHeader'}/]
-            b:if(cond!='data:post.isDateStart')
-              | &lt;div class=&quot;date-posts&quot;&gt;
-            .post-outer
-              b:include(data='post' name='post')/
-              b:include(
-                cond!='data:blog.pageType in {&quot;static_page&quot;,&quot;item&quot;}'
-                data='post' name='comment_picker'
-              )
-            b:if(cond!='data:post.includeAd')
-              .inline-ad
-                data:adCode
 
-          b:if(cond!='data:numPosts != 0')
-            | &lt;/div&gt;&lt;/div&gt;
+          b:include(name='nextprev')/
 
-        b:include(name='nextprev')/
+          b:include(name='feedLinks')/
 
-        b:include(name='feedLinks')/
+          b:else/
+          b:include(name='mobile-main')/
 
-        b:else/
-        b:include(name='mobile-main')/
-
-      b:include(cond!='data:top.showPlusOne' name='googlePlusBootstrap')/
+        b:include(cond!='data:top.showPlusOne' name='googlePlusBootstrap')/
 
     b:includable#backlinkDeleteIcon(var='backlink')
       span(expr:class!='&quot;item-control &quot; + data:backlink.adminClass')

@@ -1,4 +1,5 @@
-mixin Widget_Label(id, title)
+mixin Widget_Label(id, title, cond)
+  - var cond = cond || 'true'
   b:widget(
     id=id
     locked='false'
@@ -14,12 +15,13 @@ mixin Widget_Label(id, title)
       b:widget-setting(name='showFreqNumbers') false
 
     b:includable#main
-      h2.h5 詳細カテゴリー
-      ul.row.list-unstyled.p-0.my-2
-        b:loop(values='data:labels' var='label')
-          li.col-6.my-1
-            a.d-block(expr:href!='data:label.url')
-              #{'data:label.name'}/
-              b:if(cond!='data:showFreqNumbers')
-                span(class='label-count' dir='ltr')
-                  | (#[#{'data:label.count'}/])
+      b:if(cond!=cond)
+        h2.h5 詳細カテゴリー
+        ul.row.list-unstyled.p-0.my-2
+          b:loop(values='data:labels' var='label')
+            li.col-6.my-1
+              a.d-block(expr:href!='data:label.url')
+                #{'data:label.name'}/
+                b:if(cond!='data:showFreqNumbers')
+                  span(class='label-count' dir='ltr')
+                    | (#[#{'data:label.count'}/])
