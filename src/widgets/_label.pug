@@ -1,9 +1,11 @@
 mixin Widget_Label(id, title)
   b:widget(
     id=id
+    locked='false'
     title=title
-    locked='true'
-    type='Label')
+    type='Label'
+    version='1')
+
     b:widget-settings
       b:widget-setting(name='sorting') ALPHA
       b:widget-setting(name='display') LIST

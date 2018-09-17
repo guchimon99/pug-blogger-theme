@@ -1,19 +1,20 @@
 mixin Widget_BlogSearch(id, title)
   b:widget(
-    id=id,
-    title=title,
-    locked='true',
+    id=id
+    locked='false'
+    title=title
     type='BlogSearch'
-  )
+    version='1')
+
     b:includable#main
       div(expr:id!='data:widget.instanceId + &quot;_form&quot;')
         form(expr:action!='data:blog.searchUrl')
-          b:attr(cond!='not data:view.isPreview',name='target', value='_top')/
+          b:attr(cond!='not data:view.isPreview' name='target' value='_top')/
           label ブログ内を検索
           div.input-group.mb-3
             input.form-control(
-              name='q', type='text'
-              autocomplete='off',
+              name='q' type='text'
+              autocomplete='off'
               expr:value!='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;'
             )
             div.input-group-append

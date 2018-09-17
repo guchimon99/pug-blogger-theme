@@ -1,10 +1,11 @@
-mixin Widget_Header (id, title, locked)
+mixin Widget_Header (id, title)
   b:widget(
-    id=id,
-    title=title,
-    locked=locked,
+    id=id
+    locked="false"
+    title=title
     type="Header"
-  )
+    version='1')
+
     b:widget-settings
       b:widget-setting(name='displayUrl')/
       b:widget-setting(name='displayHeight') 0
@@ -37,13 +38,13 @@ mixin Widget_Header (id, title, locked)
           b:else/
 
           div#header-inner
-            a(expr:href!='data:blog.homepageUrl', style='display: block')
+            a(expr:href!='data:blog.homepageUrl' style='display: block')
               img(
                 expr:id!='data:widget.instanceId + &quot;_headerimg&quot;'
-                expr:src!='data:sourceUrl',
-                expr:alt!='data:title',
-                expr:height!='data:height',
-                expr:width!='data:width',
+                expr:src!='data:sourceUrl'
+                expr:alt!='data:title'
+                expr:height!='data:height'
+                expr:width!='data:width'
                 style='display: block'
               )
             b:if(cond!='data:imagePlacement == &quot;BEFORE_DESCRIPTION&quot;')
@@ -64,5 +65,5 @@ mixin Widget_Header (id, title, locked)
             data:description/
 
     b:includable#title
-      b:tag(name='a', cond!='data:blog.url != data:blog.homepageUrl', expr:href!='data:blog.homepageUrl')
+      b:tag(name='a' cond!='data:blog.url != data:blog.homepageUrl' expr:href!='data:blog.homepageUrl')
         data:title/
