@@ -15,35 +15,17 @@ mixin Widget_PopularPosts(id, title, cond)
 
     b:includable#main
       b:if(cond!=cond)
-        div.widget-content.popular-posts
-          ul
-            b:loop(values='data:posts' var='post')
-              li
-                b:if(cond!='!data:showThumbnails')
-                  b:if(cond!='!data:showSnippets')
-                    a(expr:href='data:post.href')
-                      #{'data:post.title'}/
+        h2.h5.mb-2 人気の記事
+        ul.row.list-unstyled.p-0.mb-4
+          b:loop(values='data:posts' var='post')
+            li.col-3.mb-2
+              a(expr:href='data:post.href')
+                div.p-2.bg-white.rounded.mb-2
+                  b:if(cond!='data:post.featuredImage.isResizable or data:post.thumbnail')
+                    b:with(
+                      value!='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;) : data:post.thumbnail'
+                      var='image')
+                      img.w-100(expr:src!='data:image')/
                     b:else/
-                    div.item-title
-                      a(expr:href!='data:post.href') #[#{'data:post.title'}/]
-                    div.item-snippet
-                      #{'data:post.snippet'}/
-
-                  b:else/
-                  div(expr:class!='data:showSnippets ? &quot;item-content&quot; : &quot;item-thumbnail-only&quot;')
-
-                    b:if(cond!='data:post.featuredImage.isResizable or data:post.thumbnail')
-                      div.item-thumbnail
-                        a(expr:href='data:post.href' target='_blank')
-                          b:with(
-                            value!='data:post.featuredImage.isResizable ? resizeImage(data:post.featuredImage, 72, &quot;1:1&quot;) : data:post.thumbnail'
-                            var='image')
-                            img(alt='' border='0' expr:src!='data:image')/
-
-                    div.item-title
-                      a(expr:href='data:post.href')
-                        #{'data:post.title'}/
-                    b:if(cond!='data:showSnippets')
-                      div.item-snippet
-                        #{'data:post.snippet'}/
-                    div(style='clear: both;')/
+                    img.w-100(src='https://dummyimage.com/512/EEE/CCC.png&text=No%20Thumbnail')
+                small #[#{'data:post.title'}/]
