@@ -16,9 +16,9 @@ mixin Widget_Label(id, title)
     b:includable#main
       div(expr:class!='&quot;widget-content &quot; + data:display + &quot;-label-widget-content&quot;')
         b:if(cond!='data:display == &quot;list&quot;')
-          ul
+          ul.row
             b:loop(values='data:labels' var='label')
-              li
+              li.col-6
                 b:if(cond!='data:blog.url == data:label.url')
                   span(expr:dir='data:blog.languageDirection') #[#{'data:label.name'}/]
                   b:else/
