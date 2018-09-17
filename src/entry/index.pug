@@ -3,7 +3,15 @@ include ../widgets/_index
 doctype xml
 doctype html
 
-html
+html(
+  b:version='2'
+  class='v2'
+  expr:dir!='data:blog.languageDirection'
+  xmlns!='http://www.w3.org/1999/xhtml'
+  xmlns:b!='http://www.google.com/2005/gml/b'
+  xmlns:data!='http://www.google.com/2005/gml/data'
+  xmlns:expr!='http://www.google.com/2005/gml/expr')
+
   head
     b:include(data='blog', name='all-head-content')/
     meta(name='viewport', content='width=device-width')/
@@ -16,6 +24,11 @@ html
     b:skin
       | <![CDATA[
       include ../assets/css/skin.css
+      | ]]>
+
+    b:template-skin
+      | <![CDATA[
+      include ../assets/css/template-skin.css
       | ]]>
 
   body
