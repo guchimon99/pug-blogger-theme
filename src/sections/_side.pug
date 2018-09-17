@@ -2,10 +2,11 @@ b:section#side.side(
   maxwidgets='',
   showaddelement='yes'
 )
-  +Widget_HTML('HTML1', 'side_html-top')
+  +Widget_HTML('HTML1')
     include ../contents/_logo
-  +Widget_HTML('HTML2', 'side_html-ads')
+  +Widget_HTML('HTML2')
     include ../contents/_ads-single
-  +Widget_BlogSearch('BlogSearch1', 'side_html-blog-search')
+  +Widget_HTML('HTML3')
+    include ../contents/_side-search
   +Widget_Label('Label1', 'side_label')
-  +Widget_HTML('HTML3', 'side_html-sns')
+  +Widget_HTML('HTML4', 'side_html-sns')
