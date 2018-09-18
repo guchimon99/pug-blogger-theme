@@ -47,13 +47,11 @@ mixin Widget_Blog(id, title, cond)
                 | &lt;div class=&quot;date-posts&quot;&gt;
               .post-outer
                 b:include(data='post' name='post')/
-                b:include(
-                  cond!='data:blog.pageType in {&quot;static_page&quot;,&quot;item&quot;}'
-                  data='post' name='comment_picker'
-                )
+                b:include(data='post' name='comment_picker'
+                  cond!='data:blog.pageType in {&quot;static_page&quot;,&quot;item&quot;}')/
               b:if(cond!='data:post.includeAd')
                 .inline-ad
-                  data:adCode
+                  data:adCode/
 
             b:if(cond!='data:numPosts != 0')
               | &lt;/div&gt;&lt;/div&gt;
@@ -501,7 +499,7 @@ mixin Widget_Blog(id, title, cond)
 
         div.post-body.entry-content(
           expr:id!='&quot;post-body-&quot; + data:post.id'
-          expr:itemprop='(data:blog.metaDescription ? &quot;&quot; : &quot;description &quot;) + &quot;articleBody&quot;')
+          expr:itemprop!='(data:blog.metaDescription ? &quot;&quot; : &quot;description &quot;) + &quot;articleBody&quot;')
           #{'data:post.body'}/
           div(style='clear: both;')/
 
