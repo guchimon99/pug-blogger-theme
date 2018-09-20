@@ -1,5 +1,9 @@
-mixin Widget_Header(id, title, cond)
-  - var cond = cond || 'true'
+mixin Widget_Header(cond, title)
+  -
+    cond = cond || 'true'
+    title = title || 'no title'
+    var type = 'Header'
+    var id = type + newID()
   b:widget(
     id=id
     locked="false"

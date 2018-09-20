@@ -1,5 +1,9 @@
-mixin Widget_PopularPosts(id, title, cond)
-  - var cond = cond || 'true'
+mixin Widget_PopularPosts(cond, title)
+  -
+    cond = cond || 'true'
+    title = title || 'no title'
+    var type = 'PopularPosts'
+    var id = type + newID()
   b:widget(
     id=id
     locked='false'

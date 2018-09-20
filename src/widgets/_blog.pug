@@ -1,10 +1,14 @@
-mixin Widget_Blog(id, title, cond)
-  - var cond = cond || 'true'
+mixin Widget_Blog(cond, title)
+  -
+    cond = cond || 'true'
+    title = title || 'no title'
+    var type = 'Blog'
+    var id = type + newID()
   b:widget(
     id=id
     locked='false'
     title=title
-    type='Blog'
+    type=type
     version='1')
 
     b:widget-settings

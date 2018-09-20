@@ -1,5 +1,9 @@
-mixin Widget_PageList(id, title, cond)
-  - var cond = cond || 'true'
+mixin Widget_PageList(cond, title)
+  -
+    cond = cond || 'true'
+    title = title || 'no title'
+    var type = 'PageList'
+    var id = type + newID()
   b:widget(
     id=id
     locked='false'

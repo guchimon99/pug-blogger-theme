@@ -1,5 +1,9 @@
-mixin Widget_HTML(id, title, cond)
-  - var cond = cond || 'true'
+mixin Widget_HTML(cond, title)
+  -
+    cond = cond || 'true'
+    title = title || 'no title'
+    var type = 'HTML'
+    var id = type + newID()
   b:widget(
     id=id
     locked="false"

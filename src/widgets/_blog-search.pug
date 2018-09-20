@@ -1,10 +1,14 @@
-mixin Widget_BlogSearch(id, title, cond)
-  - var cond = cond || 'true'
+mixin Widget_BlogSearch(cond, title)
+  -
+    cond = cond || 'true'
+    title = title || 'no title'
+    var type = 'BlogSearch'
+    var id = type + newID()
   b:widget(
     id=id
     locked='false'
     title=title
-    type='BlogSearch'
+    type=type
     version='1')
 
     b:includable#main
