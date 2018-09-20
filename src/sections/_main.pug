@@ -3,11 +3,11 @@ b:section#main.main(
   maxwidgets=''
   showaddelement='yes'
 )
-  +Widget_PageList()
+  +Widget_PageList
   +Widget_HTML('data:blog.url == data:blog.homepageUrl')
     include ../contents/_home
-  +Widget_PopularPosts()
+  +Widget_PopularPosts
   +Widget_HTML('data:blog.url == data:blog.homepageUrl')
     include ../contents/_line-stamp
   +Widget_Blog()
-  +Widget_HTML()
+  +Widget_HTML
