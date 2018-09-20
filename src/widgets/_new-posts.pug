@@ -1,0 +1,100 @@
+mixin Widget_NewPosts(cond, title)
+  -
+    cond = cond || 'true'
+    title = title || 'no title'
+    var type = 'Blog'
+    var id = type + newID()
+  b:widget(
+    id=id
+    locked='false'
+    title=title
+    type='Blog'
+    version='1')
+
+    b:widget-settings
+      b:widget-setting(name='showDateHeader') false
+      b:widget-setting(name='style.textcolor') #000000
+      b:widget-setting(name='showShareButtons') false
+      b:widget-setting(name='authorLabel') By
+      b:widget-setting(name='showCommentLink') false
+      b:widget-setting(name='style.urlcolor') #008000
+      b:widget-setting(name='showAuthor') false
+      b:widget-setting(name='style.linkcolor') #0000ff
+      b:widget-setting(name='style.unittype') TextAndImage
+      b:widget-setting(name='style.bgcolor') #ffffff
+      b:widget-setting(name='showAuthorProfile') false
+      b:widget-setting(name='style.layout') 1x1
+      b:widget-setting(name='showLabels') false
+      b:widget-setting(name='showLocation') false
+      b:widget-setting(name='showTimestamp') false
+      b:widget-setting(name='postsPerAd') 1
+      b:widget-setting(name='showBacklinks') false
+      b:widget-setting(name='style.bordercolor') #ffffff
+      b:widget-setting(name='showInlineAds') false
+      b:widget-setting(name='showReactions') false
+
+    b:includable#main(var='top')
+      b:if(cond!=cond)
+        .new-posts.container
+          .row
+            .col-12.mb-4
+              h2.h4 新しい記事
+            .col-12
+              b:include(data='top' name='status-message')/
+
+            b:loop(values='data:posts' var='post')
+              .col-3.mb-4
+                b:include(data='post' name='post')/
+                b:if(cond!='data:post.includeAd')
+                  .inline-ad
+                    data:adCode/
+          b:include(name='nextprev')/
+
+    b:includable#nextprev
+      .row.justify-content-around
+        .col-6.mb-4
+          b:if(cond!='data:newerPageUrl')
+            a.btn.btn-primary.btn-block(
+              expr:href!='data:newerPageUrl'
+              expr:title='data:newerPageTitle')
+              data:newerPageTitle/
+
+        .col-6.mb-4
+          b:if(cond!='data:olderPageUrl')
+              a.btn.btn-primary.btn-block(
+                expr:href!='data:olderPageUrl',
+                expr:id!='data:widget.instanceId + &quot;_blog-pager-older-link&quot;',
+                expr:title='data:olderPageTitle')
+                data:olderPageTitle/
+        .col-12.mb-4
+          a.btn.btn-primary.btn-block(expr:href='data:blog.homepageUrl')
+            data:homeMsg/
+
+    b:includable#post(var='post')
+
+      a(
+        itemprop='blogPost'
+        itemscope='itemscope'
+        itemtype='http://schema.org/BlogPosting'
+        expr:href!='data:post.link ? data:post.link : data:post.url')
+
+        meta(expr:content!='data:blog.blogId', itemprop='blogId')/
+        meta(expr:content!='data:post.id', itemprop='postId')/
+
+        .bg-white.p-1.border.rounded
+          b:if(cond!='data:post.firstImageUrl')
+            meta(expr:content!='data:post.firstImageUrl',itemprop='image_url')/
+            img.w-100(expr:src!="data:post.firstImageUrl")
+            b:else/
+            img.w-100(src="https://dummyimage.com/512/EEE/CCC.png&text=Thumbnail")
+
+        b:if(cond!='data:post.title')
+          h3.h5(itemprop='name')
+            #{'data:post.title'}/
+          b:else/
+          span タイトルなし
+
+    b:includable#status-message
+      b:if(cond!='data:navMessage')
+        div.alert.alert-primary
+          data:navMessage/
